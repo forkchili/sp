@@ -1,4 +1,6 @@
 # sp
+![lol](https://github.com/forkchili/sp/assets/136859765/95c18be1-c272-4736-b75c-a62ceb8e50eb)
+
 Stepfinance price, or sp, returns step price in terminal. That's the only price you need fam :)
 
 # Installation
