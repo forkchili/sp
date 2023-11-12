@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
-	"sp/apis"
 	"strings"
+
+	"github.com/forkchili/sp/apis"
 
 	"github.com/fatih/color"
 )

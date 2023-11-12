@@ -1,0 +1,64 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.21.3
+
+    - name: Go mod tidy
+      run: go mod tidy
+
+    - name: Build for Linux
+      run: GOOS=linux go build -o sp-linux-amd64
+
+    - name: Build for Windows
+      run: GOOS=windows go build -o sp-windows-amd64.exe
+
+    - name: Build for macOS
+      run: GOOS=darwin go build -o sp-darwin-amd64
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this release:
+          - sp works lol
+
+    - name: Upload Linux build
+      uses: actions/upload-artifact@v2
+      with:
+        name: sp-linux-amd64
+        path: sp-linux-amd64
+
+    - name: Upload Windows build
+      uses: actions/upload-artifact@v2
+      with:
+        name: sp-windows-amd64.exe
+        path: sp-windows-amd64.exe
+
+    - name: Upload macOS build
+      uses: actions/upload-artifact@v2
+      with:
+        name: sp-darwin-amd64
+        path: sp-darwin-amd64

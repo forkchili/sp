@@ -1,4 +1,4 @@
-module sp
+module github.com/forkchili/sp
 
 go 1.21.3
 
