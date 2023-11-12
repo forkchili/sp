@@ -34,31 +34,17 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Create Release
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "v1.0.0"
-        prerelease: false
-        files: |
-          sp-linux-amd64
-          sp-windows-amd64.exe
-          sp-darwin-amd64
+    - name: Run ls
+      run: ls
 
-    - name: Upload Linux build
-      uses: actions/upload-artifact@v2
-      with:
-        name: sp-linux-amd64
-        path: sp-linux-amd64
-
-    - name: Upload Windows build
-      uses: actions/upload-artifact@v2
-      with:
-        name: sp-windows-amd64.exe
-        path: sp-windows-amd64.exe
-
-    - name: Upload macOS build
-      uses: actions/upload-artifact@v2
-      with:
-        name: sp-darwin-amd64
+    # steps:
+    # - name: Create Release
+    #   uses: "marvinpinto/action-automatic-releases@latest"
+    #   with:
+    #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+    #     automatic_release_tag: "v1.0.0"
+    #     prerelease: false
+    #     files: |
+    #       sp-linux-amd64
+    #       sp-windows-amd64.exe
+    #       sp-darwin-amd64
