@@ -37,29 +37,12 @@ jobs:
     steps:
     - name: Create Release
       id: create_release
-      uses: actions/create-release@v1
+    - uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          Changes in this release:
-          - sp works lol
-
-    - name: Upload Linux build
-      uses: actions/upload-artifact@v2
-      with:
-        name: sp-linux-amd64
-        path: sp-linux-amd64
-
-    - name: Upload Windows build
-      uses: actions/upload-artifact@v2
-      with:
-        name: sp-windows-amd64.exe
-        path: sp-windows-amd64.exe
-
-    - name: Upload macOS build
-      uses: actions/upload-artifact@v2
-      with:
-        name: sp-darwin-amd64
-        path: sp-darwin-amd64
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: ${{ github.ref }}
+        prerelease: false
+        files: |
+          sp-linux-amd64
+          sp-windows-amd64.exe
+          sp-darwin-amd64
