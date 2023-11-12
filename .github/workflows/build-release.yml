@@ -34,10 +34,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
 
+    steps:
     - name: Run ls
       run: ls
-
-    # steps:
     # - name: Create Release
     #   uses: "marvinpinto/action-automatic-releases@latest"
     #   with:
