@@ -21,6 +21,9 @@ jobs:
     - name: Go mod tidy
       run: go mod tidy
 
+    - name: Run pwd
+      run: pwd
+
     - name: Build for Linux
       run: GOOS=linux GOARCH=amd64 go build -o sp-linux-amd64
 
@@ -30,13 +33,16 @@ jobs:
     - name: Build for macOS
       run: GOOS=darwin GOARCH=amd64 go build -o sp-darwin-amd64
 
+    - name: Run ls
+      run: ls && pwd
+
   release:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
     - name: Run ls
-      run: ls
+      run: ls && pwd
     # - name: Create Release
     #   uses: "marvinpinto/action-automatic-releases@latest"
     #   with:
