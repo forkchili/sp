@@ -45,3 +45,20 @@ jobs:
           sp-linux-amd64
           sp-windows-amd64.exe
           sp-darwin-amd64
+
+    - name: Upload Linux build
+      uses: actions/upload-artifact@v2
+      with:
+        name: sp-linux-amd64
+        path: sp-linux-amd64
+
+    - name: Upload Windows build
+      uses: actions/upload-artifact@v2
+      with:
+        name: sp-windows-amd64.exe
+        path: sp-windows-amd64.exe
+
+    - name: Upload macOS build
+      uses: actions/upload-artifact@v2
+      with:
+        name: sp-darwin-amd64
