@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +21,6 @@ jobs:
     - name: Go mod tidy
       run: go mod tidy
 
-    - name: Run pwd
-      run: pwd
-
     - name: Build for Linux
       run: GOOS=linux GOARCH=amd64 go build -o sp-linux-amd64
 
@@ -33,23 +30,14 @@ jobs:
     - name: Build for macOS
       run: GOOS=darwin GOARCH=amd64 go build -o sp-darwin-amd64
 
-    - name: Run ls
-      run: ls && pwd
+    - name: Create Release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "v1.0.0"
+        prerelease: false
+        files: |
+          sp-linux-amd64
+          sp-windows-amd64.exe
+          sp-darwin-amd64
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Run ls
-      run: ls && pwd
-    # - name: Create Release
-    #   uses: "marvinpinto/action-automatic-releases@latest"
-    #   with:
-    #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
-    #     automatic_release_tag: "v1.0.0"
-    #     prerelease: false
-    #     files: |
-    #       sp-linux-amd64
-    #       sp-windows-amd64.exe
-    #       sp-darwin-amd64
