@@ -22,13 +22,13 @@ jobs:
       run: go mod tidy
 
     - name: Build for Linux
-      run: GOOS=linux go build -o sp-linux-amd64
+      run: GOOS=linux GOARCH=amd64 go build -o sp-linux-amd64
 
     - name: Build for Windows
-      run: GOOS=windows go build -o sp-windows-amd64.exe
+      run: GOOS=windows GOARCH=amd64 go build -o sp-windows-amd64.exe
 
     - name: Build for macOS
-      run: GOOS=darwin go build -o sp-darwin-amd64
+      run: GOOS=darwin GOARCH=amd64 go build -o sp-darwin-amd64
 
   release:
     needs: build
@@ -39,6 +39,7 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
+        token: ${{ secrets.GITHUB_TOKEN }}
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
         body: |
